@@ -52,10 +52,12 @@ classDiagram
     class animalHandler {
         +animalsArray: array
         +getAnimalData(): Promise
+        +renderAnimals(): Function
     }
 ```
 
-donde `getAnimalData()` es la promesa que trae la información desde `animales.json`, y `animalsArray` es el array que se encarga de mantener el estado de los animales creados. No se implementa lógica para modificar posibles animales.
+donde `getAnimalData()` es la promesa que trae la información desde `animales.json`, `animalsArray` es el array que se encarga de mantener el estado de los animales creados. No se implementa lógica para modificar posibles animales.
+Por último la función `renderAnimals` se encarga de renderizar los animales en la "sección tabla"
 
 ### importante sobre `getAnimalData()`
 

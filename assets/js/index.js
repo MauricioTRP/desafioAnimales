@@ -15,6 +15,15 @@ animalHandler.getAnimalData()
     console.error(err)
   })
 
+// Objeto que mapea nombres de animales, con constructores
+// Llave "texto", valor "Constructor" importados en al principio
+const constructoresAnimal = {
+  Leon: Leon,
+  Lobo: Lobo,
+  Aguila: Aguila,
+  Oso: Oso,
+  Serpiente: Serpiente
+}
 
 // cambio de imágen del formulario
 document.querySelector("#animal").addEventListener("change", function() {
@@ -25,5 +34,34 @@ document.querySelector("#animal").addEventListener("change", function() {
   document.getElementById("preview").style.backgroundImage = `url(./assets/imgs/${animalSeleccionado.imagen})`
 })
 
-// Manejo del submit del formulario
-document.querySelector("#btnRegistrar").addEventListener("click", )
+// Manejo de envío del formulario
+document.querySelector("#btnRegistrar").addEventListener("click", function() {
+  // Análisis formulario //
+  // buscamos elementos a analizar
+  const seleccion = document.getElementById("animal").value
+  const edadAnimal = document.getElementById("edad").value
+  const comentariosAnimal = document.getElementById("comentarios").value
+
+  // preguntamos si algún campo está vacío
+  if ( !seleccion || !edadAnimal || !comentariosAnimal ) {
+    // en caso de estar vacío mandamos un alert
+    alert("Información insuficiente para crear animal")
+  } else {
+    const dataAnimalSeleccionado = animalData.animales.find(animal => animal.name == seleccion)
+
+    // Creamos instancia del animal, usando el objeto constructores animal
+    let nuevoAnimal = new constructoresAnimal[seleccion](
+      seleccion,
+      edadAnimal,
+      dataAnimalSeleccionado.imagen,
+      comentariosAnimal,
+      dataAnimalSeleccionado.sonido
+    )
+    
+    // agrega el animal al array con animales
+    animalHandler.animalsArray.push(nuevoAnimal)
+
+    // renderiza nuevamente las cartas
+    animalHandler.renderAnimals()
+  }
+})
