@@ -27,8 +27,8 @@ class Animal {
     return this.#img
   }
 
-  set comentarios(comentario) {
-    this.#comentarios = comentario
+  get comentarios() {
+    return this.#comentarios
   }
 
   get sonido() {

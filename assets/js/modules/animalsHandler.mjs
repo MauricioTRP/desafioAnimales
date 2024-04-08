@@ -25,9 +25,15 @@ const animalHandler = (() => {
           <img 
             src="./assets/imgs/${animal.img}" 
             height="200px" 
+            data-toggle="modal" data-target="#exampleModal"
             width="100%"
           >
-          <button class="btn btn-secondary w-100"><img src="./assets/imgs/audio.svg" height="30px"></button>
+          <button class="btn btn-secondary w-100">
+            <img 
+              src="./assets/imgs/audio.svg" 
+              height="30px"
+            >
+          </button>
         </div>
       </div>`
 
@@ -35,6 +41,43 @@ const animalHandler = (() => {
     })
 
     document.getElementById("Animales").innerHTML = cards;
+
+    modalEventListener()
+
+    soundEventListener()
+  }
+
+  function modalEventListener() {
+    const imagenes = document.querySelectorAll(".participante > div > img")
+    imagenes.forEach((img, idx) => {
+      img.addEventListener("click", () => {
+        updateModal(idx)
+      })
+    })
+  }
+
+  function soundEventListener() {
+    const sonidos = document.querySelectorAll(".participante > div > button")
+    sonidos.forEach((sound, idx) => {
+      sound.addEventListener("click", () => {
+        playAudio(idx)
+      })
+    })
+  }
+
+  function playAudio(id) {
+    const audio = new Audio(`./assets/sounds/${animalsArray[id].sonido}`)
+    console.log(audio)
+    audio.play()
+  }
+
+  function updateModal(id) {
+    const modal = document.querySelector(".modal-body")
+    console.log(animalsArray[id])
+    modal.innerHTML = `<p>${animalsArray[id].nombre}</p>
+    <p>${animalsArray[id].edad}</p>
+    <p>${animalsArray[id].comentarios}</p>
+    `
   }
 
   // returned object
@@ -42,7 +85,9 @@ const animalHandler = (() => {
   return {
     getAnimalData: getAnimalData,
     animalsArray: animalsArray,
-    renderAnimals: renderAnimals
+    renderAnimals: renderAnimals,
+    playAudio: (id) => {playAudio(id)},
+    updateModal: (id) => {updateModal(id)}
   }
 })()
 
