@@ -63,5 +63,12 @@ document.querySelector("#btnRegistrar").addEventListener("click", function() {
 
     // renderiza nuevamente las cartas
     animalHandler.renderAnimals()
+
+    // limpia los datos del formulario
+    seleccion.selectedIndex = 0
+    edadAnimal.selectedIndex = 0;
+    comentariosAnimal.value = ''
+  document.getElementById("preview").style.backgroundImage = `url(./assets/imgs/lion.svg)`
+
   }
 })
