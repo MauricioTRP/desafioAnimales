@@ -65,10 +65,10 @@ document.querySelector("#btnRegistrar").addEventListener("click", function() {
     animalHandler.renderAnimals()
 
     // limpia los datos del formulario
-    seleccion.selectedIndex = 0
-    edadAnimal.selectedIndex = 0;
-    comentariosAnimal.value = ''
-  document.getElementById("preview").style.backgroundImage = `url(./assets/imgs/lion.svg)`
+    document.getElementById("animal").selectedIndex = 0
+    document.getElementById("edad").selectedIndex = 0;
+    document.getElementById("comentarios").value = ''
+    document.getElementById("preview").style.backgroundImage = `url(./assets/imgs/lion.svg)`
 
   }
 })
