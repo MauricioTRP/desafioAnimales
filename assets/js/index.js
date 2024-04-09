@@ -1,4 +1,3 @@
-import { Animal } from "./clases/Animal.mjs";
 import { Leon } from "./clases/Leon.mjs";
 import { Lobo } from "./clases/Lobo.mjs";
 import { Aguila } from "./clases/Aguila.mjs";

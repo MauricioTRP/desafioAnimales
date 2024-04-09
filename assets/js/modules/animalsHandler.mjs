@@ -74,9 +74,9 @@ const animalHandler = (() => {
   function updateModal(id) {
     const modal = document.querySelector(".modal-body")
     console.log(animalsArray[id])
-    modal.innerHTML = `<p>${animalsArray[id].nombre}</p>
-    <p>${animalsArray[id].edad}</p>
-    <p>${animalsArray[id].comentarios}</p>
+    modal.innerHTML = `<p class="text-white">${animalsArray[id].nombre}</p>
+    <p class="text-white">${animalsArray[id].edad}</p>
+    <p class="text-white">${animalsArray[id].comentarios}</p>
     `
   }
 
