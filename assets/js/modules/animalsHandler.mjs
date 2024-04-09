@@ -86,8 +86,6 @@ const animalHandler = (() => {
     getAnimalData: getAnimalData,
     animalsArray: animalsArray,
     renderAnimals: renderAnimals,
-    playAudio: (id) => {playAudio(id)},
-    updateModal: (id) => {updateModal(id)}
   }
 })()
 

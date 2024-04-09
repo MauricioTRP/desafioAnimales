@@ -69,6 +69,5 @@ document.querySelector("#btnRegistrar").addEventListener("click", function() {
     document.getElementById("edad").selectedIndex = 0;
     document.getElementById("comentarios").value = ''
     document.getElementById("preview").style.backgroundImage = `url(./assets/imgs/lion.svg)`
-
   }
 })

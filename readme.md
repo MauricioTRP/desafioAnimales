@@ -53,10 +53,10 @@ classDiagram
         +animalsArray: array
         -modalEventListener: Function
         -soundEventListener: Function
+        -playAudio(id): Function
+        -updateModal(id): Function
         +getAnimalData(): Promise
         +renderAnimals(): Function
-        +playAudio(id): Function
-        +updateModal(id): Function
     }
 ```
 
@@ -78,7 +78,7 @@ Es un array que almacena las instancias de los animales creados a través del fo
 Es una función privada que analiza el DOM buscando todas las
 imagenes que cumplen con `.participante > div > img` que renderizan las cartas con animales, y les agrega un event listener usando la función pública `updateModal`
 
-### updateModal(id)
+### -updateModal(id)
 
 Función que actualiza el contenido del modal, usando como argumento el índice del animal en el array `animalsArray`
 
@@ -87,10 +87,75 @@ Función que actualiza el contenido del modal, usando como argumento el índice 
 Es una función privada que analiza el DOM buscando todas las
 imagenes que cumplen con `.participante > div > buttpn` que renderizan las imágenes con parlantes, y les agrega un event listener usando la función pública `playAudio`
 
-### playAudio(id)
+### -playAudio(id)
 
-Función atenta al evento click de los botones de audio que crea un objeto de audio con la ruta del audio, y luego lo reproduce
+Función atenta al evento click de los botones de audio que crea un objeto de audio usando la ruta del audio, y luego lo reproduce
 
-## Eventos y manejo de formulario
+## `index.js`: Eventos y manejo de formulario
 
-En `index.js` se importan las clases y el módulo, para hacer uso de ellos en los `callbacks` utilizados en `addEventListener`
+En `index.js` se importan las clases y el módulo, para hacer uso de ellos en los `callbacks` utilizados en `addEventListener`.
+
+### Objetos de importancia en `index.js`
+
+Con la finalidad de manipular la creación de instancias basado en el nombre del animal, es que se crea el siguiente objeto:
+
+```js
+const constructoresAnimal = {
+  Leon: Leon,
+  Lobo: Lobo,
+  Aguila: Aguila,
+  Oso: Oso,
+  Serpiente: Serpiente
+}
+```
+
+Este objeto hace una relación univoca entre la llave "texto" del animal, y el constructor importado desde su respectiva clase. Por ejemplo
+
+```js
+new constructoresAnimal["Serpiente"](argumentos)
+```
+
+es identico a usar
+
+```js
+new Serpiente(argumentos)
+```
+
+de esta forma podemos usar programáticamente el nombre del animal en `constructoresAnimal` para obtener una instancia de una determinada clase.
+
+### HTML y su manipulación con JS | `eventListener`
+
+Existen 2 tipos de imputs en el formulario a los cuales debemos agregar `eventListener`.
+El primero es un elemento de tipo `<select>` con opciones.
+
+```HTML
+<select class="form-control bg-dark text-white" id="animal">
+  <option disabled selected>Seleccione un animal</option>
+  <option value="Leon">León</option>
+  <option value="Lobo">Lobo</option>
+  <option value="Oso">Oso</option>
+  <option value="Serpiente">Serpiente</option>
+  <option value="Aguila">Águila</option>
+</select>
+```
+
+Al analizar sus propiedades en JS nos encontramos con lo siguiente:
+
+#### Propiedad `value`
+
+La propiedad value nos muestra la opción seleccionada en un determinado momento, un ejemplo de salida podría ser:
+
+```js
+document.getElementById("animal").value // -> "Leon"
+```
+
+#### Propiedad `selectedIndex`
+
+La propiedad `selectedIndex` nos permite modificar la opción seleccionada en base al índice de las opciones. EJ:
+
+```js
+// La propiedad
+document.getElementById("animal").selectedIndex = 0 // -> <option disabled selected>Seleccione un animal</option>
+```
+
+En `index.js` se hace uso de estas propiedades para manipular el formulario junto con los eventos `change` que nos permite estar atentos al cambio de selección y al evento `click` que nos permite manipular el DOM en caso de click del usuario.
